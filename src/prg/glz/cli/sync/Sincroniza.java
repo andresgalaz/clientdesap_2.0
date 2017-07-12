@@ -226,7 +226,7 @@ public class Sincroniza {
                 if (cmpTModif < 0) {
                     dialogo.cofirmaCommit( fLocal.getName() );
                 } else if (cmpTModif == 0) {
-                    if (isEqualCFuente( fLocal, formRemoto ) && frmLocal.getfTpObjeto() == formRemoto.getfTpObjeto()) {
+                    if (isEqualCFuente( fLocal, formRemoto ) && frmLocal.getfTpObjeto().compareTo( formRemoto.getfTpObjeto() ) == 0 ) {
                         dialogo.setRespuesta( DlgOpSync.DLG_SALTAR );
                     }
                 }
@@ -338,7 +338,7 @@ public class Sincroniza {
                 if (cmpTModif > 0) {
                     dialogo.cofirmaUpdate( fLocal.getName() );
                 } else if (cmpTModif == 0) {
-                    if (isEqualCFuente( fLocal, formRemoto ) && frmLocal.getfTpObjeto().equals( formRemoto.getfTpObjeto() )) {
+                    if (isEqualCFuente( fLocal, formRemoto ) && frmLocal.getfTpObjeto().compareTo( formRemoto.getfTpObjeto() ) == 0 ) {
                         dialogo.setRespuesta( DlgOpSync.DLG_SALTAR );
                     } else {
                         dialogo.cofirmaUpdate( fLocal.getName() );

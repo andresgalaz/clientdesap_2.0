@@ -2,7 +2,10 @@
  * Mantener conexión activa 2016/01/21
   
 = v0020f =
-@ 19/05/2016
+@ 12/07/2017
+ * Se agrega omisión de certificados HTTPS
+ * Cambio de color
+@ 19/05/2017
  * Se agrega omisión de certificados HTTPS
  * Cambio de color
  
