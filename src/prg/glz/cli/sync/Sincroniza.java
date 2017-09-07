@@ -93,10 +93,11 @@ public class Sincroniza {
                 String cIdForm = ConvertFile.sinExtension( fLocal.getName() );
                 logger.warn( "No se pudo convertir TMODIF al actualizar el formulario" + cIdForm + "\nTMODIF=" + mapForm.get( "TMODIF" ), e );
             }
-
             formObjetoLocalDao.update( formRemoto );
-
             return true;
+        }
+        if (mapForm.get( "stackError" ) != null) {
+            logger.error( mapForm.get( "stackError" ) );
         }
         throw new SQLException( (String) mapForm.get( "message" ) );
     }
