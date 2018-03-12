@@ -30,7 +30,7 @@ public class FrmPrincipal extends JFrame {
         try {
             init();
             this.setVisible( true );
-            this.setTitle( "Cliente Sicronización Framework Web - Compustrom v2.0f" );
+            this.setTitle( "Cliente Sicronización Framework Web - Compustrom v2.0g" );
         } catch (Exception e) {
             logger.error( "No se pudo inicializar pantalla principal", e );
         }
