@@ -7,21 +7,21 @@ package prg.glz.cli.sync;
  * modification, are permitted provided that the following conditions
  * are met:
  *
- *   - Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
+ * - Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
  *
- *   - Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
+ * - Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
  *
- *   - Neither the name of Oracle nor the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
+ * - Neither the name of Oracle nor the names of its
+ * contributors may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -124,8 +124,7 @@ public class WatchDir implements Runnable {
         Files.walkFileTree( start, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
-                    throws IOException
-            {
+                    throws IOException {
                 // if (dir.equals(
                 // WatchDir.this.migraFrm.getHsql().getDatabaseDir() ))
                 // return FileVisitResult.SKIP_SUBTREE;
@@ -175,6 +174,14 @@ public class WatchDir implements Runnable {
                 Path child = dir.resolve( name );
                 File fileChild = child.toFile();
 
+                // Se espera antes de verificar el estado del archivo, en algunos casos el archivo es borrado antes de
+                // ser actualizado, otros quedan vacíos previos a ser actualizados, esas dos condiciones generan
+                // problemas al momento de sicronizar
+                try {
+                    Thread.sleep( 180 );
+                } catch (InterruptedException e) {
+                }
+
                 if (kind == ENTRY_MODIFY) {
                     // Se controla que el evento no este duplicado
                     // if (fileChild.lastModified() - lastModif > 100) {
@@ -195,7 +202,7 @@ public class WatchDir implements Runnable {
                     } catch (FrameworkException | SQLException e) {
                         logger.error( "No se pudo subir archivo:" + fileChild, e );
                         JOptionPane.showMessageDialog( PnParams.frmPrincipal, e.getMessage() );
-                    }                    
+                    }
                 } else if (kind == ENTRY_CREATE) {
                     if (fileChild.isFile()) {
                         // Se llama al servidor WEB para subir el archivo

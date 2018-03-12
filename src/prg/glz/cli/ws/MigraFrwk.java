@@ -75,6 +75,12 @@ public class MigraFrwk extends AbstractFrwk {
      * @param fileLocal
      */
     public Map<String, Object> upload(File fileLocal, TFormObjetoMigra formRemoto) {
+        // wait
+        try {
+            Thread.sleep( 180 );
+        } catch (InterruptedException e) {
+        }
+
         Map<String, Object> mresp = new HashMap<String, Object>();
 
         logger.debug( "Archivo " + fileLocal + " inicio sincronización" );

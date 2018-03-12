@@ -1,5 +1,10 @@
 = Pendiente
  * Mantener conexión activa 2016/01/21
+
+= v0020g =
+@ 12/03/2018
+ * Se espera 180 milisegundos en algunas operaciones, para evitar que el archivo no
+   existe o esté vacío
   
 = v0020f =
 @ 12/07/2017
